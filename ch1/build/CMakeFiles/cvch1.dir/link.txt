@@ -1,1 +1,0 @@
-/usr/bin/c++     CMakeFiles/cvch1.dir/main.cpp.o  -o cvch1  -l&{OpenCV_LIBS}qw 

@@ -1,3 +1,3 @@
-/workspaces/digital_image_process/ch1/build/CMakeFiles/rebuild_cache.dir
-/workspaces/digital_image_process/ch1/build/CMakeFiles/edit_cache.dir
-/workspaces/digital_image_process/ch1/build/CMakeFiles/cvch1.dir
+C:/Users/lz599/Desktop/digital_image_process/ch1/build/CMakeFiles/cvch1.dir
+C:/Users/lz599/Desktop/digital_image_process/ch1/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/lz599/Desktop/digital_image_process/ch1/build/CMakeFiles/ZERO_CHECK.dir

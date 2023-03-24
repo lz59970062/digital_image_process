@@ -6,10 +6,14 @@ set(CMAKE_CXX_STANDARD 11)
 
 find_package(OpenCV REQUIRED)
 # include 
-include_directories(&{OpenCV_INCLUDE_DIRS})
+message(STATUS "OpenCV version: ${OpenCV_VERSION}")
+message(STATUS "OpenCV libraries: ${OpenCV_LIBS}")
+message(STATUS "OpenCV include path: ${OpenCV_INCLUDE_DIRS}")
+
+include_directories(${OpenCV_INCLUDE_DIRS})
 
 add_executable(cvch1 main.cpp)
 #link 
 
-target_link_libraries(cvch1 &{OpenCV_LIBS}qw
+target_link_libraries(cvch1 ${OpenCV_LIBS}
 )

@@ -10,7 +10,7 @@ message(STATUS "OpenCV version: ${OpenCV_VERSION}")
 message(STATUS "OpenCV libraries: ${OpenCV_LIBS}")
 message(STATUS "OpenCV include path: ${OpenCV_INCLUDE_DIRS}")
 
-include_directories(${OpenCV_INCLUDE_DIRS})
+include_directories(${OpenCV_INCLUDE_DIRS} .)
 
 add_executable(cvch1 main.cpp  myfunc.cpp)
 #link 

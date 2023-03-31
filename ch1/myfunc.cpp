@@ -50,6 +50,7 @@ Mat &img_binary(Mat &img, uint8_t thr)
     return img;
 }
 
+
 Mat &img_inverse(Mat &img){
     if(img.empty()){
         std::cout<<"img is empty"<<std::endl;

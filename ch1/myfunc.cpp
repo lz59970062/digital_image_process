@@ -27,7 +27,7 @@ void slatNosise(cv::Mat &img, float f)
 }
 
 // binary
-Mat &img_binary(Mat &img, uint8_t thr)
+Mat img_binary(Mat &img, uint8_t thr)
 {
     if (img.empty())
     {
@@ -56,7 +56,7 @@ Mat &img_binary(Mat &img, uint8_t thr)
     return img;
 }
 
-Mat &img_inverse(Mat &img)
+Mat img_inverse(Mat &img)
 {
     if (img.empty())
     {
@@ -116,8 +116,8 @@ void addSaltNoise(Mat &img, int n)
     }
 }
 
-
-Mat Transform(double theta,double sw,double sh,double mx,double my ){
+Mat Transform(double theta, double sw, double sh, double mx, double my)
+{
     Mat T = Mat::eye(3, 3, CV_32F);
     T.at<float>(0, 0) = cos(theta);
     T.at<float>(0, 1) = -sin(theta);
@@ -130,25 +130,35 @@ Mat Transform(double theta,double sw,double sh,double mx,double my ){
     T.at<float>(1, 0) *= sh;
     T.at<float>(1, 1) *= sh;
     return T;
-} 
+}
 
-
-Vec3b inster(const Mat &img,double x,double y){
+Vec3b inster(const Mat &img, double x, double y)
+{
     double x1 = floor(x);
     double x2 = ceil(x);
     double y1 = floor(y);
     double y2 = ceil(y);
+
+    // Clamp x2 and y2 to be within the valid range
+    x2 = std::min(x2, img.cols - 1.0);
+    y2 = std::min(y2, img.rows - 1.0);
+    x1 = std::max(x1, 0.0);
+    y1 = std::max(y1, 0.0);
     double dx = x - x1;
     double dy = y - y1;
-    Vec3b p1 = img.at<Vec3b>(y1,x1);
-    Vec3b p2 = img.at<Vec3b>(y1,x2);
-    Vec3b p3 = img.at<Vec3b>(y2,x1);
-    Vec3b p4 = img.at<Vec3b>(y2,x2);
-    Vec3b r1=p1+(p2-p1)*dx;
-    Vec3b r2=p3+(p4-p3)*dx;
-    Vec3b r=r1+(r2-r1)*dy;
+
+    Vec3b p1 = img.at<Vec3b>(y1, x1);
+    Vec3b p2 = img.at<Vec3b>(y1, x2);
+    Vec3b p3 = img.at<Vec3b>(y2, x1);
+    Vec3b p4 = img.at<Vec3b>(y2, x2);
+
+    Vec3b r1 = p1 + (p2 - p1) * dx;
+    Vec3b r2 = p3 + (p4 - p3) * dx;
+    Vec3b r = r1 + (r2 - r1) * dy;
+
     return r;
 }
+
 ///////img_transformer///////
 // arg img:img to trans
 // T :mat transform mat
@@ -165,7 +175,7 @@ R:rotation mat
 Mat img_transf(Mat &img, Mat &T, int methed)
 {
     Mat R = T(Rect2d(0, 0, 2, 2));
-    Mat t(2, 1, CV_32F); 
+    Mat t(2, 1, CV_32F);
     t.at<float>(0) = T.at<float>(0, 2);
     t.at<float>(1) = T.at<float>(1, 2);
 
@@ -180,15 +190,16 @@ Mat img_transf(Mat &img, Mat &T, int methed)
     std::cout << new_w << " " << new_h << std::endl;
     Mat img2(new_w, new_h, CV_8UC3);
     Mat Tinv;
-    if( methed==1){
+    if (methed == 1)
+    {
         t.at<float>(0) += new_w / 2;
         t.at<float>(1) += new_h / 2;
     }
-    // hconcat(R.t(), -t, Tinv); 
+    // hconcat(R.t(), -t, Tinv);
     // float data2[] = {0.0, 0.0, 1.0};
-    // vconcat(Tinv, Mat(1, 3, CV_32F, data2), Tinv); 
+    // vconcat(Tinv, Mat(1, 3, CV_32F, data2), Tinv);
     Tinv = T.inv();
-    
+
     for (auto i = 0; i < img2.rows; i++)
     {
         auto ptr = img2.ptr<Vec3b>(i);
@@ -197,7 +208,7 @@ Mat img_transf(Mat &img, Mat &T, int methed)
             Mat p = (Mat_<float>(3, 1) << j, i, 1);
             Mat p2 = Tinv * p;
 
-            if (p2.at<float>(0)>0&&p2.at<float>(1)>0&&p2.at<float>(0)<img.cols&&p2.at<float>(1)<img.rows)
+            if (p2.at<float>(0) > 0 && p2.at<float>(1) > 0 && p2.at<float>(0) < img.cols && p2.at<float>(1) < img.rows)
             {
                 ptr[j] = inster(img, p2.at<float>(0), p2.at<float>(1));
             }
@@ -209,4 +220,41 @@ Mat img_transf(Mat &img, Mat &T, int methed)
     }
 
     return img2;
+}
+
+void saltandpepper(cv::Mat &image, float f)
+{
+    int n1 = image.rows * image.cols * f / 2;
+    int n2 = image.rows * image.cols * f / 2;
+    for (int k = 0; k < n1; k++)
+    {
+        int i = rand() % image.cols;
+        int j = rand() % image.rows;
+        if (image.channels() == 1)
+        {
+            image.at<uchar>(j, i) = 255;
+        }
+        else if (image.channels() == 3)
+        {
+
+            image.at<cv::Vec3b>(j, i)[0] = 255;
+            image.at<cv::Vec3b>(j, i)[1] = 255;
+            image.at<cv::Vec3b>(j, i)[2] = 255;
+        }
+    }
+    for (int k = 0; k < n2; k++)
+    {
+        int i = rand() % image.cols;
+        int j = rand() % image.rows;
+        if (image.channels() == 1)
+        {
+            image.at<uchar>(j, i) = 0;
+        }
+        else if (image.channels() == 3)
+        {
+            image.at<cv::Vec3b>(j, i)[0] = 0;
+            image.at<cv::Vec3b>(j, i)[1] = 0;
+            image.at<cv::Vec3b>(j, i)[2] = 0;
+        }
+    }
 }

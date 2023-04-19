@@ -50,7 +50,7 @@ class Noise
     Mat gaussian(float mean, float sigma);
     Mat rayleigh(float sigma);
     Mat exponential(float lambda);
-
+    F_tr operator%(float modulo); 
     private:
     string name;
     Mat img;

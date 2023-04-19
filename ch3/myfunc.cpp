@@ -302,20 +302,21 @@ Mat F_tr::mdft()
     dft(complexI, complexI);    // 进行傅里叶变换
     // 计算幅值，转换到对数尺度(logarithmic scale)
     //=> log(1 + sqrt(Re(DFT(I))^2 + Im(DFT(I))^2))
-    split(complexI, planes);                    // planes[0] = Re(DFT(I),planes[1] = Im(DFT(I))
-                                                // 即planes[0]为实部,planes[1]为虚部
-    this->dft_i=planes[1].clone();
-    this->dft_r=planes[0].clone();
+    split(complexI, planes); // planes[0] = Re(DFT(I),planes[1] = Im(DFT(I))
+                             // 即planes[0]为实部,planes[1]为虚部
+    this->dft_i = planes[1].clone();
+    this->dft_r = planes[0].clone();
     magnitude(planes[0], planes[1], planes[0]); // planes[0] = magnitude
     Mat magI = planes[0];
     magI += Scalar::all(1);
     log(magI, magI); // 转换到对数尺度(logarithmic scale)
     return magI;
 }
-Mat F_tr::mdft_phase(){
-    Mat p(this->dft_r.size(),CV_32F);
-    phase(this->dft_r,this->dft_i,p);
- 
+Mat F_tr::mdft_phase()
+{
+    Mat p(this->dft_r.size(), CV_32F);
+    phase(this->dft_r, this->dft_i, p);
+
     normalize(p, p, 0, 255, NORM_MINMAX, CV_8UC1);
     return p;
 }
@@ -367,7 +368,6 @@ Mat F_tr::mdft_c(int met)
         return magI;
     }
 }
-
 
 // class Noise
 // {
@@ -441,7 +441,7 @@ double generateGaussianNoise(double mu, double sigma)
 {
     // 定义一个特别小的值
     const double epsilon = numeric_limits<
-    double>::min(); // 返回目标数据类型能表示的最逼近 1 的正数和 1 的差的绝对值 
+        double>::min(); // 返回目标数据类型能表示的最逼近 1 的正数和 1 的差的绝对值
     static double z0, z1;
     static bool flag = false;
     flag = !flag;
@@ -467,7 +467,7 @@ Mat addGaussianNoise(Mat &srcImage)
     // 深拷贝,克隆
     int channels = resultImage.channels();
     // 获取图像的通道
-    int nRows = resultImage.rows; // 图像的行数 
+    int nRows = resultImage.rows;            // 图像的行数
     int nCols = resultImage.cols * channels; // 图像的总列数
     // 判断图像的连续性
     if (resultImage.isContinuous()) // 判断矩阵是否连续，若连续，我们相当于只需要遍历一个一维数组

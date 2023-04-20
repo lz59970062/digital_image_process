@@ -462,62 +462,22 @@ Mat Noise::gaussian(float mean, float sigma)
     int channels = image.channels();
     int cols = image.cols;
     int rows = image.rows;
-    if (image.isContinuous())
-    {
-        cols = cols * rows;
-        rows = 1;
-    }
+    //if (image.isContinuous())
+    //{
+    //    cols = cols * rows;
+    //    rows = 1;
+    //}
     for (int i = 0; i < rows; i++)
     {
         for (int j = 0; j < cols; j+=2)
         {
           vector<Vec3b> noise = generateGaussianNoise(mean, sigma);
           image.at<Vec3b>(i,j)= image.at<Vec3b>(i,j)+noise[0];
+        
           image.at<Vec3b>(i,j+1)= image.at<Vec3b>(i,j+1)+noise[1];
         }
     }
     return image;
 }
-// 为图像添加高斯噪声
-// Mat addGaussianNoise(Mat &srcImage)
-// {
-//     Mat resultImage = srcImage.clone();
-//     // 深拷贝,克隆
-//     int channels = resultImage.channels();
-//     // 获取图像的通道
-//     int nRows = resultImage.rows;            // 图像的行数
-//     int nCols = resultImage.cols * channels; // 图像的总列数
-//     // 判断图像的连续性
-//     if (resultImage.isContinuous()) // 判断矩阵是否连续，若连续，我们相当于只需要遍历一个一维数组
-//     {
-//         nCols *= nRows;
-//         nRows = 1;
-//     }
-//     for (int i = 0; i < nRows; i++)
-//     {
-//         for (int j = 0; j < nCols; j++)
-//         { // 添加高斯噪声
-//             int val = resultImage.ptr<uchar>(i)[j] +
-//                       generateGaussianNoise(2, 0.8) * 32;
-//             if (val < 0)
-//                 val = 0;
-//             if (val > 255)
-//                 val = 255;
-//             resultImage.ptr<uchar>(i)[j] =
-//                 (uchar)val;
-//         }
-//     }
-//     return resultImage;
-// }
-// int main()
-// {
-// Mat srcImage = imread("D:\\1.jpg");
-// if (!srcImage.data)
-// return -1;
-// imshow("srcImage", srcImage);
-// Mat resultImage = addGaussianNoise(src
-// Image);
-// imshow("resultImage", resultImage);
-// waitKey(0);
-// return 0;
-// }
+ 
+ 

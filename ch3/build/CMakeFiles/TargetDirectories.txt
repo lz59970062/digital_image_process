@@ -1,0 +1,3 @@
+/home/ubu/Desktop/digital_image_process-master/ch3/build/CMakeFiles/cvch3.dir
+/home/ubu/Desktop/digital_image_process-master/ch3/build/CMakeFiles/edit_cache.dir
+/home/ubu/Desktop/digital_image_process-master/ch3/build/CMakeFiles/rebuild_cache.dir

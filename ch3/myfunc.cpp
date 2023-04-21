@@ -169,7 +169,7 @@ t:transport vec
 R:rotation mat
 
 */
-Mat img_transf(Mat &img, Mat &T, int methed)
+Mat img_transf(Mat &img, Mat &T, int methed=0)
 {
     Mat R = T(Rect2d(0, 0, 2, 2));
     Mat t(2, 1, CV_32F);
@@ -386,45 +386,34 @@ Mat F_tr::mdft_c(int met)
 //     string name;
 //     Mat img;
 //     Mat noise_rate;
-
 Mat Noise::saltandpepper(float f)
 {
     Mat image = this->img.clone();
-    int n1 = image.rows * image.cols * f / 2;
-    int n2 = image.rows * image.cols * f / 2;
-    for (int k = 0; k < n1; k++)
-    {
-        int i = rand() % image.cols;
-        int j = rand() % image.rows;
-        if (image.channels() == 1)
-        {
-            image.at<uchar>(j, i) = 255;
-        }
-        else if (image.channels() == 3)
-        {
+    int total_pixels = image.rows * image.cols * f;
+    int n1 = total_pixels / 2;
+    int n2 = total_pixels - n1;
 
-            image.at<cv::Vec3b>(j, i)[0] = 255;
-            image.at<cv::Vec3b>(j, i)[1] = 255;
-            image.at<cv::Vec3b>(j, i)[2] = 255;
-        }
-    }
-    for (int k = 0; k < n2; k++)
-    {
-        int i = rand() % image.cols;
-        int j = rand() % image.rows;
-        if (image.channels() == 1)
+    auto apply_noise = [&](int value) {
+        for (int k = 0; k < value; k++)
         {
-            image.at<uchar>(j, i) = 0;
+            int i = rand() % image.cols;
+            int j = rand() % image.rows;
+
+            if (image.channels() == 1)
+            {
+                image.at<uchar>(j, i) = value;
+            }
+            else if (image.channels() == 3)
+            {
+                image.at<cv::Vec3b>(j, i) = cv::Vec3b(value, value, value);
+            }
         }
-        else if (image.channels() == 3)
-        {
-            image.at<cv::Vec3b>(j, i)[0] = 0;
-            image.at<cv::Vec3b>(j, i)[1] = 0;
-            image.at<cv::Vec3b>(j, i)[2] = 0;
-        }
-    }
+    };
+    apply_noise(n1);
+    apply_noise(n2);
     return image;
 }
+
 
 // 生成高斯分布的噪声：
 vector<Vec3b> generateGaussianNoise(double mu, double sigma)

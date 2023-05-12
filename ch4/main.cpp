@@ -57,13 +57,21 @@ int main(int arvc, char *argv[])
     img+=1;
     img/=255;
     cv::log(img , img_log);
+    cv::pow(img, 1.5, img_pow);
     // img_log*=255;
     
 	normalize(img_log,img_log, 0, 255, NORM_MINMAX);
+    normalize(img_pow, img_pow, 0, 255, NORM_MINMAX);
     img_log.convertTo(img_log, CV_8U);
+    img_pow.convertTo(img_pow, CV_8U);
+
     cv::imshow("imgraw log", img_log);
     Mat img4 = h1.getHistogramImage(img_log);
     cv::imshow("imgraw log hismap", img4);
+
+    cv::imshow("imgraw pow", img_pow);
+    Mat img5 = h1.getHistogramImage(img_pow);
+    cv::imshow("imgraw pow hismap", img5);
     cv::waitKey(0);
 
 #endif

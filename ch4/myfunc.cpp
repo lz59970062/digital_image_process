@@ -416,7 +416,7 @@ Mat Noise::saltandpepper(float f)
 }
 
 // 生成高斯分布的噪声：
-vector<Vec3b> generateGaussianNoise(double mu, double sigma)
+inline vector<Vec3b> generateGaussianNoise(double mu, double sigma)
 {
     // 定义一个特别小的值
     const double epsilon = numeric_limits<

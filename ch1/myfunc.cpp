@@ -218,7 +218,6 @@ Mat img_transf(Mat &img, Mat &T, int methed)
             }
         }
     }
-
     return img2;
 }
 

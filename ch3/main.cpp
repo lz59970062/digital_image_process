@@ -3,6 +3,7 @@
 #include "myfunc.h"
 
 #define ITEM 5
+
 int main(int arvc, char *argv[])
 {
 
@@ -21,7 +22,6 @@ int main(int arvc, char *argv[])
     Mat img2 = noise.gaussian(0, 50);
     hconcat(img, img2, img);
     imshow("img", img);
-
     waitKey(0);
 
 #elif ITEM == 3

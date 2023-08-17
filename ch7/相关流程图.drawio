@@ -1,0 +1,60 @@
+<mxfile host="app.diagrams.net" modified="2023-06-01T11:01:33.230Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Safari/537.36 Edg/115.0.0.0" etag="P2ZKfsMkThpZA93RrdPZ" version="21.3.6" type="device">
+  <diagram name="第 1 页" id="5nDD9sZMzwFYkxg2Z-bp">
+    <mxGraphModel dx="1158" dy="-566" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="y1ZLQi6aJxDCDG3mssmD-125" value="输入: 原始图像" style="rounded=1;absoluteArcSize=1;arcSize=14;whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="239" y="1295" width="122" height="33" as="geometry" />
+        </mxCell>
+        <mxCell id="y1ZLQi6aJxDCDG3mssmD-126" value="初始化: 创建并初始化count和map数组" style="rounded=1;absoluteArcSize=1;arcSize=14;whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="154.5" y="1359" width="290" height="33" as="geometry" />
+        </mxCell>
+        <mxCell id="y1ZLQi6aJxDCDG3mssmD-127" value="计算直方图: 遍历图像的每个像素,更新count数组" style="rounded=1;absoluteArcSize=1;arcSize=14;whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="119.5" y="1425" width="361" height="33" as="geometry" />
+        </mxCell>
+        <mxCell id="y1ZLQi6aJxDCDG3mssmD-128" value="计算累积分布函数: 遍历count数组,计算并填充map数组" style="rounded=1;absoluteArcSize=1;arcSize=14;whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="96.5" y="1487" width="407" height="33" as="geometry" />
+        </mxCell>
+        <mxCell id="y1ZLQi6aJxDCDG3mssmD-129" value="创建结果图像: 根据原始图像创建一个新的同样大小的图像" style="rounded=1;absoluteArcSize=1;arcSize=14;whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="86.5" y="1552" width="426" height="33" as="geometry" />
+        </mxCell>
+        <mxCell id="y1ZLQi6aJxDCDG3mssmD-130" value="应用均衡化: 遍历原始图像的每个像素,根据map数组更新结果图像的对应像素" style="rounded=1;absoluteArcSize=1;arcSize=14;whiteSpace=wrap;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="20" y="1617" width="559" height="33" as="geometry" />
+        </mxCell>
+        <mxCell id="y1ZLQi6aJxDCDG3mssmD-131" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5039960517257941;exitY=1.0121212583599668;entryX=0.5016810976225754;entryY=0.012121258359966856;rounded=0;" edge="1" parent="1" source="y1ZLQi6aJxDCDG3mssmD-125" target="y1ZLQi6aJxDCDG3mssmD-126">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="y1ZLQi6aJxDCDG3mssmD-132" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5016810976225754;exitY=1.0242425167199336;entryX=0.49996542468295535;entryY=-0.006060513583096591;rounded=0;" edge="1" parent="1" source="y1ZLQi6aJxDCDG3mssmD-126" target="y1ZLQi6aJxDCDG3mssmD-127">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="y1ZLQi6aJxDCDG3mssmD-133" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.49996542468295535;exitY=1.0060607447768704;entryX=0.4999693324583461;entryY=0.006060744776870265;rounded=0;" edge="1" parent="1" source="y1ZLQi6aJxDCDG3mssmD-127" target="y1ZLQi6aJxDCDG3mssmD-128">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="y1ZLQi6aJxDCDG3mssmD-134" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.4999693324583461;exitY=1.0181820031368372;entryX=0.5011444091796875;entryY=-0.012121027166193182;rounded=0;" edge="1" parent="1" source="y1ZLQi6aJxDCDG3mssmD-128" target="y1ZLQi6aJxDCDG3mssmD-129">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="y1ZLQi6aJxDCDG3mssmD-135" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5011444091796875;exitY=1.0000002311937737;entryX=0.49997767139632715;entryY=2.3119377367424243e-7;rounded=0;" edge="1" parent="1" source="y1ZLQi6aJxDCDG3mssmD-129" target="y1ZLQi6aJxDCDG3mssmD-130">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="y1ZLQi6aJxDCDG3mssmD-153" value="" style="curved=1;startArrow=none;endArrow=block;exitX=0.5039960517257941;exitY=1.0121212583599668;entryX=0.5016810976225754;entryY=0.012121258359966856;rounded=0;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points" />
+            <mxPoint x="299.9759793726471" y="1329" as="sourcePoint" />
+            <mxPoint x="299.9996306140622" y="1359" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

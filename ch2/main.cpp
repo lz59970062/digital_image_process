@@ -12,7 +12,6 @@ int main() {
         cout << "Image not found" << endl;
         return -1;
     }
-
     // // 2.移动，水平，垂直翻转
     // Mat translated = img_transf(img, Transform(0, 1, 1, 50, 50), 0);
     // Mat flipped_horizontally = img_transf(img, Transform(0, -1, 1, img.cols, 0), 0);

@@ -8,6 +8,6 @@ message(STATUS "OpenCV libraries: ${OpenCV_LIBS}")
 message(STATUS "OpenCV include path: ${OpenCV_INCLUDE_DIRS}")
 
 include_directories(${OpenCV_INCLUDE_DIRS} .)
-add_executable(cvch5 main.cpp img_trans.cpp)
+add_executable(cvch5 main.cpp img_trans.cpp filter.cpp)
 #link 
 target_link_libraries(cvch5 ${OpenCV_LIBS})

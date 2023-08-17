@@ -8,6 +8,6 @@ message(STATUS "OpenCV libraries: ${OpenCV_LIBS}")
 message(STATUS "OpenCV include path: ${OpenCV_INCLUDE_DIRS}")
 
 include_directories(${OpenCV_INCLUDE_DIRS} .)
-add_executable(cvch4 main.cpp  myfunc.cpp histogram.hpp)
+add_executable(cvch4 main.cpp img_trans.cpp  histogram.hpp)
 #link 
 target_link_libraries(cvch4 ${OpenCV_LIBS})
